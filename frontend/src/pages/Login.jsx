@@ -10,12 +10,20 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // client-side validation
+    const errors = [];
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) errors.push({ field: "email", message: "Valid email is required" });
+    if (!password) errors.push({ field: "password", message: "Password is required" });
+    if (errors.length) return setError(errors);
+
     try {
       setError("");
       const { token } = await apiLogin({ email, password });
       login(token);
     } catch (err) {
-      setError(err.response?.data?.message || err.message);
+      const resp = err.response?.data;
+      if (resp?.errors) setError(resp.errors);
+      else setError(resp?.message || err.message);
     }
   };
 
@@ -33,7 +41,15 @@ export default function Login() {
         </div>
         <button type="submit">Login</button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {Array.isArray(error) ? (
+        <ul style={{ color: "red" }}>
+          {error.map((e, i) => (
+            <li key={i}>{e.field ? `${e.field}: ${e.message}` : e.message}</li>
+          ))}
+        </ul>
+      ) : (
+        error && <p style={{ color: "red" }}>{error}</p>
+      )}
     </div>
   );
 }

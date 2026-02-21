@@ -14,7 +14,7 @@ function App() {
           <div style={{ padding: 20 }}>
             <h1>CRUD App</h1>
             <p>
-              <Link to="/login">Login</Link> | <Link to="/register">Register</Link> | <Link to="/tasks">Tasks</Link>
+              <Link to="/login">Login</Link> | <Link to="/register">Register</Link> 
             </p>
           </div>
         }

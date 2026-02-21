@@ -11,12 +11,20 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errors = [];
+    if (!name || !name.trim()) errors.push({ field: "name", message: "Name is required" });
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) errors.push({ field: "email", message: "Valid email is required" });
+    if (!password || password.length < 6) errors.push({ field: "password", message: "Password must be at least 6 characters" });
+    if (errors.length) return setError(errors);
+
     try {
       setError("");
       const { token } = await apiRegister({ name, email, password });
       login(token);
     } catch (err) {
-      setError(err.response?.data?.message || err.message);
+      const resp = err.response?.data;
+      if (resp?.errors) setError(resp.errors);
+      else setError(resp?.message || err.message);
     }
   };
 
@@ -38,7 +46,15 @@ export default function Register() {
         </div>
         <button type="submit">Register</button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {Array.isArray(error) ? (
+        <ul style={{ color: "red" }}>
+          {error.map((e, i) => (
+            <li key={i}>{e.field ? `${e.field}: ${e.message}` : e.message}</li>
+          ))}
+        </ul>
+      ) : (
+        error && <p style={{ color: "red" }}>{error}</p>
+      )}
     </div>
   );
 }
