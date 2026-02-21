@@ -13,7 +13,6 @@ cd backend
 npm install
 npm run start
 ```
-
 - Frontend: open `/frontend` then:
 
 ```bash
@@ -21,7 +20,6 @@ cd frontend
 npm install
 npm run dev
 ```
-
 The frontend expects the backend API base at `http://localhost:5000/api/v1` by default. You can override it by setting `VITE_API_URL` in the frontend environment.
 
 ## Authentication
@@ -30,6 +28,43 @@ The frontend expects the backend API base at `http://localhost:5000/api/v1` by d
 - Login `POST /api/v1/auth/login` — returns `{ token }` on success.
 
 All protected routes expect the header `Authorization: Bearer <token>`.
+
+## Docker
+
+- Prerequisites: Docker and Docker Compose (v2) installed on your machine.
+
+- Development (compose): from the project root run:
+
+```bash
+# build images and start services (foreground)
+docker compose build
+docker compose up
+
+# or run detached
+docker compose up -d
+
+# stop and remove containers
+docker compose down
+```
+
+- Build individual images:
+
+```bash
+# backend image
+docker build -f backend/Dockerfile -t crud-backend ./backend
+
+# frontend image
+docker build -f frontend/Dockerfile -t crud-frontend ./frontend
+```
+
+- Environment and ports:
+  - Backend default port: `5000` (API base: `http://localhost:5000/api/v1`).
+  - Frontend (Vite) default port: `5173`.
+  - Ensure environment variables for the backend (`MONGO_URI`, `JWT_SECRET`, etc.) are provided to the containers. You can place them in a `.env` file at the project root or configure them in your `docker-compose.yml`.
+
+- Notes:
+  - For local development you can keep the frontend pointed at the backend by setting `VITE_API_URL` to `http://backend:5000/api/v1` in a compose network, or to `http://localhost:5000/api/v1` when running the frontend locally.
+  - For production builds, set `NODE_ENV=production` and provide production-ready secrets and MongoDB connection strings.
 
 ## API Endpoints
 
