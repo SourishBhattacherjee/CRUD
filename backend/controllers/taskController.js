@@ -6,7 +6,10 @@ exports.createTask = async (req, res) => {
 };
 
 exports.getTasks = async (req, res) => {
-  const tasks = await taskService.getTasks(req.user.id);
+  const tasks = await taskService.getTasks(
+    req.user.id,
+    req.user.role
+  );
   res.json(tasks);
 };
 
@@ -14,12 +17,17 @@ exports.updateTask = async (req, res) => {
   const task = await taskService.updateTask(
     req.params.id,
     req.user.id,
+    req.user.role,
     req.body
   );
   res.json(task);
 };
 
 exports.deleteTask = async (req, res) => {
-  await taskService.deleteTask(req.params.id, req.user.id);
+  await taskService.deleteTask(
+    req.params.id,
+    req.user.id,
+    req.user.role
+  );
   res.json({ message: "Task deleted" });
 };
