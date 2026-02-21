@@ -5,7 +5,9 @@
 <img width="1859" height="651" alt="image" src="https://github.com/user-attachments/assets/2ea45c34-988e-4f94-bf68-2567d724b946" />
 
 
-
+Admin Credentials:
+email : admin@test.com
+password:123456
 
 This repository contains a simple CRUD application with a Node/Express backend and a React (Vite) frontend. It supports user registration, login (JWT auth), and per-user tasks with ADMIN role capabilities.
 
