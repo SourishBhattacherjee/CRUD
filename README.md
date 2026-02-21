@@ -141,9 +141,4 @@ If you want, I can add a small Swagger setup to the backend (`swagger-jsdoc` + `
 - Remember to keep `JWT_SECRET` and `MONGO_URI` secure and not checked into source control.
 - For production, add HTTPS, rate-limiting, helmet, CORS restrictions, and stronger password policies.
 
-## Files added
 
-- `postman_collection.json` — Postman collection for quick import
-
----
-If you want, I can also generate a full OpenAPI `swagger.json` and wire Swagger UI to `/api-docs`. Would you like me to add that now?
