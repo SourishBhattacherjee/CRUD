@@ -1,4 +1,11 @@
 # CRUD Project
+<img width="1800" height="872" alt="image" src="https://github.com/user-attachments/assets/94165a70-a3d7-48bf-8696-a1a910f43f15" />
+<img width="1003" height="764" alt="image" src="https://github.com/user-attachments/assets/588e67c4-d479-4f92-939d-5f3bf1f0b768" />
+<img width="1157" height="810" alt="image" src="https://github.com/user-attachments/assets/b3b4d064-8066-4da8-afde-c0e074664b94" />
+<img width="1859" height="651" alt="image" src="https://github.com/user-attachments/assets/2ea45c34-988e-4f94-bf68-2567d724b946" />
+
+
+
 
 This repository contains a simple CRUD application with a Node/Express backend and a React (Vite) frontend. It supports user registration, login (JWT auth), and per-user tasks with ADMIN role capabilities.
 
@@ -140,5 +147,7 @@ If you want, I can add a small Swagger setup to the backend (`swagger-jsdoc` + `
 - The backend uses `express-validator` to validate inputs; the frontend performs client-side checks and displays server validation responses.
 - Remember to keep `JWT_SECRET` and `MONGO_URI` secure and not checked into source control.
 - For production, add HTTPS, rate-limiting, helmet, CORS restrictions, and stronger password policies.
+
+
 
 
